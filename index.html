@@ -1,0 +1,108 @@
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem">
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">한국 화장품 수출액 (2024 추정)</div>
+    <div style="font-size:28px;font-weight:500;color:var(--color-text-primary)">101억 달러</div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">세계 4위 화장품 수출국</div>
+  </div>
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem">
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:4px">일본 내 K-뷰티 성장 (2024)</div>
+    <div style="font-size:28px;font-weight:500;color:#1D9E75">+120.8%</div>
+    <div style="font-size:12px;color:var(--color-text-secondary);margin-top:4px">프랑스 추월 → 일본 최대 뷰티 수입국</div>
+  </div>
+</div>
+
+<div style="position:relative;width:100%;height:260px;margin-bottom:16px">
+  <canvas id="exportChart"></canvas>
+</div>
+
+<div style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:8px">주요 수출 시장 비중 (2023)</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+  <div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+      <span style="color:var(--color-text-primary)">🇨🇳 중국</span><span style="color:var(--color-text-secondary)">32%</span>
+    </div>
+    <div style="height:8px;background:var(--color-background-secondary);border-radius:4px;overflow:hidden">
+      <div style="height:100%;width:32%;background:#1D9E75;border-radius:4px"></div>
+    </div>
+  </div>
+  <div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+      <span style="color:var(--color-text-primary)">🇺🇸 미국</span><span style="color:var(--color-text-secondary)">18%</span>
+    </div>
+    <div style="height:8px;background:var(--color-background-secondary);border-radius:4px;overflow:hidden">
+      <div style="height:100%;width:18%;background:#5DCAA5;border-radius:4px"></div>
+    </div>
+  </div>
+  <div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+      <span style="color:var(--color-text-primary)">🇯🇵 일본</span><span style="color:var(--color-text-secondary)">16%</span>
+    </div>
+    <div style="height:8px;background:var(--color-background-secondary);border-radius:4px;overflow:hidden">
+      <div style="height:100%;width:16%;background:#9FE1CB;border-radius:4px"></div>
+    </div>
+  </div>
+  <div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+      <span style="color:var(--color-text-primary)">🇸🇬 동남아</span><span style="color:var(--color-text-secondary)">14%</span>
+    </div>
+    <div style="height:8px;background:var(--color-background-secondary);border-radius:4px;overflow:hidden">
+      <div style="height:100%;width:14%;background:#E1F5EE;border-radius:4px"></div>
+    </div>
+  </div>
+  <div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+      <span style="color:var(--color-text-primary)">🇪🇺 유럽</span><span style="color:var(--color-text-secondary)">11%</span>
+    </div>
+    <div style="height:8px;background:var(--color-background-secondary);border-radius:4px;overflow:hidden">
+      <div style="height:100%;width:11%;background:#C0DD97;border-radius:4px"></div>
+    </div>
+  </div>
+  <div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+      <span style="color:var(--color-text-primary)">기타</span><span style="color:var(--color-text-secondary)">9%</span>
+    </div>
+    <div style="height:8px;background:var(--color-background-secondary);border-radius:4px;overflow:hidden">
+      <div style="height:100%;width:9%;background:#B4B2A9;border-radius:4px"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+new Chart(document.getElementById('exportChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024E'],
+    datasets: [{
+      label: '화장품 수출액 (억 달러)',
+      data: [27, 41, 49, 63, 66, 76, 92, 97, 101, 102],
+      backgroundColor: '#5DCAA5',
+      borderColor: '#0F6E56',
+      borderWidth: 0.5,
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: ctx => ctx.parsed.y + '억 달러' }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: { color: 'rgba(0,0,0,0.06)' },
+        ticks: { color: '#888780', font: { size: 11 }, callback: v => v + '억' }
+      },
+      x: {
+        grid: { display: false },
+        ticks: { color: '#888780', font: { size: 11 } }
+      }
+    }
+  }
+});
+</script>
